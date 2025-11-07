@@ -18,24 +18,43 @@ Centralizes visual identity, UX patterns, and data-fetch helpers.
 ## Architecture
 
 shared-components/
+
 ├── src/
+
 │ ├── components/
+
 │ │ ├── FormInput.jsx
+
 │ │ ├── TableView.jsx
+
 │ │ ├── ChartView.jsx
+
 │ │ └── ThemeSwitcher.jsx
+
 │ ├── hooks/
+
 │ ├── utils/
+
 │ │ └── apiClient.js
+
 │ ├── index.js
+
 │ └── styles/
+
 │ └── globals.css
+
 ├── tests/
+
 │ ├── test_components.test.js
+
 │ └── test_apiClient.test.js
+
 ├── .storybook/
+
 │ ├── main.js
+
 │ └── preview.js
+
 └── README.md
 
 
