@@ -1,82 +1,195 @@
-# 🎨 Shared Components Library
+# Shared Components Library
 
-## Overview
-A reusable UI and utilities library powering the SPV ecosystem interfaces.  
-Centralizes visual identity, UX patterns, and data-fetch helpers.
+Reusable UI components for internship projects, built with **React**, **TypeScript**, **Vite**, **Tailwind CSS**, **Vitest**, and **Storybook**.
 
----
-
-## Components
-- **Forms**: validated input components for all simulation parameters.  
-- **Tables**: interactive cost/risk result tables.  
-- **Charts**: dynamic graphs (Recharts/D3).  
-- **Theme Manager**: light/dark themes.  
-- **API Helpers**: wrappers for fetch/auth calls.  
+This repository is intended to be a shared design system that other front-end apps can consume (for example: internal dashboards, simulators, or documentation sites).
 
 ---
 
-## Architecture
+## Tech Stack
 
+- **React 18 + TypeScript**
+- **Vite** (build tool & dev server)
+- **Tailwind CSS** (utility-first styling)
+- **Vitest + @testing-library/react** (unit & component tests)
+- **Storybook 10 (react-vite)** (interactive documentation)
+
+---
+
+## Getting Started
+
+### 1. Install dependencies
+
+```bash
+npm install
+### 2. Run the component library in dev mode
+bash
+Copy code
+npm run dev
+Vite dev server: http://localhost:5173
+
+### 3. Run Storybook (component documentation)
+bash
+Copy code
+npm run storybook
+Storybook: http://localhost:6006
+
+### 4. Run tests
+bash
+Copy code
+npm test
+Uses Vitest.
+
+Global test setup lives in src/setupTests.ts.
+
+Tests are in src/__tests__.
+
+Project Structure
+text
+Copy code
 shared-components/
+├─ public/
+├─ src/
+│  ├─ components/
+│  │  ├─ Button.tsx
+│  │  └─ ThemeToggle.tsx
+│  ├─ stories/
+│  │  ├─ Button.stories.tsx
+│  │  └─ ThemeToggle.stories.tsx
+│  ├─ __tests__/
+│  │  ├─ Button.test.tsx
+│  │  ├─ ThemeToggle.test.tsx
+│  │  └─ api.test.ts
+│  ├─ App.tsx
+│  ├─ main.tsx
+│  ├─ index.css
+│  └─ setupTests.ts
+├─ .storybook/
+│  ├─ main.ts
+│  ├─ preview.ts
+│  └─ vitest.setup.ts
+├─ tailwind.config.js
+├─ postcss.config.js
+├─ vite.config.ts
+└─ package.json
+Available NPM Scripts
+jsonc
+Copy code
+// package.json (important scripts)
+"scripts": {
+  "dev": "vite",                 // run dev server
+  "build": "vite build",         // build library / app
+  "preview": "vite preview",     // preview production build
+  "test": "vitest",              // run unit/component tests
+  "lint": "eslint .",            // run eslint (if configured)
+  "storybook": "storybook dev",  // run Storybook
+  "build-storybook": "storybook build"
+}
+Implemented Components
+<Button />
+A reusable button component with variants.
 
-├── src/
+File: src/components/Button.tsx
+Story: src/stories/Button.stories.tsx
 
-│ ├── components/
+Props (basic):
 
-│ │ ├── FormInput.jsx
+children: ReactNode – label/content of the button.
 
-│ │ ├── TableView.jsx
+variant: "primary" | "secondary" – visual style.
 
-│ │ ├── ChartView.jsx
+className?: string – extra Tailwind classes.
 
-│ │ └── ThemeSwitcher.jsx
+disabled?: boolean – disabled state.
 
-│ ├── hooks/
+onClick?: () => void – click handler.
 
-│ ├── utils/
+Usage:
 
-│ │ └── apiClient.js
+tsx
+Copy code
+import { Button } from "./components/Button";
 
-│ ├── index.js
+<Button variant="primary">Primary Button</Button>;
+<Button variant="secondary" disabled>
+  Secondary Disabled
+</Button>;
+<ThemeToggle />
+Simple light/dark theme switcher used as a shared control.
 
-│ └── styles/
+File: src/components/ThemeToggle.tsx
+Story: src/stories/ThemeToggle.stories.tsx
 
-│ └── globals.css
+Props:
 
-├── tests/
+initialTheme?: "light" | "dark" – starting theme (default: "light").
 
-│ ├── test_components.test.js
+The component manages internal state and shows the current theme in the label.
 
-│ └── test_apiClient.test.js
+tsx
+Copy code
+import { ThemeToggle } from "./components/ThemeToggle";
 
-├── .storybook/
+<ThemeToggle initialTheme="light" />;
+Testing
+All tests are located in src/__tests__.
 
-│ ├── main.js
+Testing stack:
 
-│ └── preview.js
+vitest
 
-└── README.md
+@testing-library/react
 
+@testing-library/jest-dom
 
----
+To run tests in watch mode:
 
-## Development Workflow
-1. Run `npm install`  
-2. Start Storybook: `npm run storybook`  
-3. Develop components in isolation.  
-4. Run tests: `npm test`  
-5. Publish package via GitHub Packages or npm registry.
+bash
+Copy code
+npm test
+Current coverage:
 
----
+Button renders correctly and responds to props/events.
 
-## Phase 2 Development Tasks
-1. Initialize project (React + Vite + Tailwind + Storybook).  
-2. Build core components (Forms, Tables, Charts, ThemeSwitcher).  
-3. Implement API helpers for cross-project use.  
-4. Add Jest/RTL tests.  
-5. Publish Storybook docs site.
+ThemeToggle toggles between light/dark.
 
----
+api.test.ts verifies a simple example API helper (placeholder for future shared utilities).
 
-## Technologies
-React 18, Vite, Tailwind CSS, Jest, Storybook, npm registry.
+Storybook Documentation
+Storybook is used to document and visually test components.
+
+Default stories for:
+
+Button (Primary, Secondary, Disabled variants)
+
+ThemeToggle (light/dark initial states)
+
+Run Storybook:
+
+bash
+Copy code
+npm run storybook
+Relation to Internship Issues (#1–#15)
+This implementation covers:
+
+Project scaffold – Vite + React + TypeScript base app.
+
+Component boilerplate – src/components structure.
+
+Core UI components – Button, ThemeToggle.
+
+Styling system – Tailwind CSS integrated into Vite.
+
+Testing setup – Vitest + Testing Library + global setup file.
+
+Jest/RTL tests – basic tests for Button and ThemeToggle.
+
+API helper example & tests – api.test.ts as a placeholder pattern.
+
+Storybook scaffold – .storybook folder and integration with Vite.
+
+Storybook docs – stories for the implemented components.
+
+NPM scripts – dev, build, test, Storybook commands wired in package.json.
+
+The library is ready to be extended with additional shared UI elements (dropdowns, tables, charts, form controls, etc.) as new issues are created.
